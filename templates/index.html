@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Jahan.blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+					<div id="main">
+
+						<!-- Post -->
+						{% for mypost in posts %}
+							<article class="post">
+								<header>
+
+									<div class="title">
+										<h2><a href="">{{mypost.title}}</a></h2>
+
+
+										<p>{{mypost.titlesub}}</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">{{mypost.postdate}}</time>
+										<a href="#" class="author"><span class="name">{{mypost.authorname}}</span><img src={{mypost.author_image.url}} alt="" /></a>
+									</div>
+								</header>
+								<a href="/blog/{{mypost.id}}" class="image featured"><img src={{mypost.postimage.url}} alt="" /></a>
+								<p> {{mypost.postcontent|truncatechars:200 }}</p>
+								<footer>
+									<ul class="actions">
+										<li><a href="/blog/{{mypost.id}}" class="button large">Continue Reading</a></li>
+									</ul>
+									<ul class="stats">
+										<li><a href="#">General</a></li>
+										<li><a href="#" class="icon solid fa-comment">128</a></li>
+									</ul>
+								</footer>
+							</article>
+						{% endfor %}
+
+
+
+						<div class="pagination">
+
+    {% if posts.has_previous %}
+        <a href="?page={{ posts.previous_page_number }}"  >Previous</a>
+    {% endif %}
+
+    {% for page in paginator.page_range %}
+        {% if page == posts.number %}
+            <strong>{{ page }}</strong>
+        {% else %}
+            <a href="?page={{ page }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }} ">Next</a>
+    {% endif %}
+</div>
+					</div>
+
+				<!-- Sidebar -->
+					<section id="sidebar">
+
+						<!-- Intro -->
+							<section id="intro">
+								<a href="#" class="logo"><img src="{% static 'assets/images/logo.jpg' %}" alt="" /></a>
+								<header>
+									<h2>My Writings</h2>
+									<p>All the blogs written by me , Happy Reading</a></p>
+								</header>
+							</section>
+
+						<!-- Mini Posts -->
+
+							<section>
+								{%for mydet in aboutnew %}
+								<div class="mini-posts">
+
+									<!-- Mini Post -->
+										<article class="mini-post">
+											<header>
+												<h3><a href="/about/{{mydet.id}}">{{mydet.Name}}</a></h3>
+												<time class="published" datetime="2015-10-20">{{mydet.subname}}</time>
+												<a href="" class="author"><img src={{mydet.myimg.url}} alt="" /></a>
+											</header>
+											<a href="/about/{{mydet.id}}" class="image"><img src={{mydet.thumbnail.url}} alt="" /></a>
+										</article>
+
+								{% endfor %}
+									
+
+								</div>
+							</section>
+
+						<!-- Posts List -->
+						{%for sidep in side %}
+							<section>
+								<ul class="posts">
+									<li>
+										<article>
+											<header>
+												<h3><a href="/side/{{sidep.id}}">{{ sidep.headsub }}</a></h3>
+												<time class="published" datetime="2015-10-20">{{ sidep.dateside}}</time>
+											</header>
+											<a href="/side/{{sidep.id}}" class="image"><img src="{{sidep.imageside.url}}" alt="" /></a>
+										</article>
+									</li>
+
+
+
+								</ul>
+							</section>
+						{% endfor %}
+
+						<!-- About -->
+							<section class="blurb">
+								<h2>About</h2>
+								{% for ab in about %}
+								<p>{{ab.about}}</p>
+								{% endfor %}
+								<ul class="actions">
+									<li><a href="#" class="button">Learn More</a></li>
+								</ul>
+							</section>
+
+						<!-- Footer -->
+							<section id="footer">
+								<ul class="icons">
+									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+									<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+								</ul>
+
+							</section>
+
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src=" {% static 'assets/js/jquery.min.js' %}"></script>
+			<script src=" {% static 'assets/js/browser.min.js' %}"></script>
+			<script src=" {% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src=" {% static 'assets/js/util.js' %}"></script>
+			<script src=" {% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>
